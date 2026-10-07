@@ -63,7 +63,7 @@ export const ProblemSection: React.FC = () => {
               onClick={() => setActiveBeat(index)}
               onMouseEnter={() => setCursorText(`BEAT 0${index + 1}`)}
               onMouseLeave={() => setCursorText('')}
-              className={`p-6 border transition-all duration-300 cursor-pointer flex flex-col justify-between relative group rounded text-left ${
+              className={`p-5 sm:p-6 border transition-all duration-300 cursor-pointer flex flex-col justify-between relative group rounded-2xl text-left ${
                 isSelected
                   ? 'border-white bg-white/[0.04]'
                   : 'border-white/10 bg-neutral-950/60 hover:border-white/30'
@@ -106,8 +106,8 @@ export const ProblemSection: React.FC = () => {
       </div>
 
       {/* Solution Callout: "So we split the song in two." */}
-      <div className="p-6 sm:p-8 border border-white/20 bg-neutral-950/80 backdrop-blur-md rounded max-w-5xl w-full text-center">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 bg-white text-black font-mono text-[10px] tracking-widest uppercase font-semibold mb-3 rounded">
+      <div className="p-5 sm:p-8 border border-white/20 bg-neutral-950/80 backdrop-blur-md rounded-2xl max-w-5xl w-full text-center">
+        <div className="inline-flex items-center space-x-2 px-3 py-1 bg-white text-black font-mono text-[10px] tracking-widest uppercase font-semibold mb-3 rounded-xl">
           <Split className="w-3.5 h-3.5" />
           <span>The Know-Ta! Solution</span>
         </div>
@@ -125,7 +125,7 @@ export const ProblemSection: React.FC = () => {
             onClick={() => setCurrentScene('pipeline')}
             onMouseEnter={() => setCursorText('PIPELINE')}
             onMouseLeave={() => setCursorText('')}
-            className="inline-flex items-center space-x-2 px-5 py-2.5 bg-white text-black font-mono text-xs tracking-widest uppercase font-semibold hover:bg-neutral-200 transition-colors rounded"
+            className="inline-flex items-center space-x-2 px-5 py-2.5 bg-white text-black font-mono text-[11px] tracking-widest uppercase font-semibold hover:bg-neutral-200 transition-colors rounded-xl"
           >
             <span>Explore The 7 Steps</span>
             <ArrowRight className="w-3.5 h-3.5" />

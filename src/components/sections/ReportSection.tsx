@@ -43,7 +43,7 @@ export const ReportSection: React.FC = () => {
       </div>
 
       {/* Main Spec Card - Centered & Balanced */}
-      <div className="border border-white/20 bg-[#080808]/90 backdrop-blur-md p-6 sm:p-8 rounded max-w-5xl w-full text-left">
+      <div className="border border-white/20 bg-[#080808]/90 backdrop-blur-md p-5 sm:p-8 rounded-2xl max-w-5xl w-full text-left">
         {/* Track Title and Description */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10 mb-6">
           <div>

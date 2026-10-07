@@ -48,7 +48,7 @@ export const PipelineSection: React.FC = () => {
           <button
             onClick={handlePrev}
             disabled={activePipelineStep === 0}
-            className="p-1.5 border border-white/20 text-white disabled:opacity-30 disabled:border-white/10 hover:bg-white/10 transition-colors rounded"
+            className="p-1.5 border border-white/20 text-white disabled:opacity-30 disabled:border-white/10 hover:bg-white/10 transition-colors rounded-full"
             aria-label="Previous step"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -59,7 +59,7 @@ export const PipelineSection: React.FC = () => {
           <button
             onClick={handleNext}
             disabled={activePipelineStep === PIPELINE_STEPS.length - 1}
-            className="p-1.5 border border-white/20 text-white disabled:opacity-30 disabled:border-white/10 hover:bg-white/10 transition-colors rounded"
+            className="p-1.5 border border-white/20 text-white disabled:opacity-30 disabled:border-white/10 hover:bg-white/10 transition-colors rounded-full"
             aria-label="Next step"
           >
             <ChevronRight className="w-4 h-4" />
@@ -67,8 +67,8 @@ export const PipelineSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Horizontal Step Navigation Bar - Centered */}
-      <div className="flex justify-center items-center overflow-x-auto pb-3 mb-6 space-x-2 scrollbar-none w-full max-w-5xl mx-auto">
+      {/* Horizontal Step Navigation Bar - Snap Scroll on Mobile */}
+      <div className="flex justify-start md:justify-center items-center overflow-x-auto pb-4 mb-6 space-x-2 scrollbar-none w-full max-w-5xl mx-auto px-4 snap-x snap-mandatory">
         {PIPELINE_STEPS.map((s, idx) => {
           const isActive = idx === activePipelineStep;
           return (
@@ -77,7 +77,7 @@ export const PipelineSection: React.FC = () => {
               onClick={() => setActivePipelineStep(idx)}
               onMouseEnter={() => setCursorText(`STEP 0${idx + 1}`)}
               onMouseLeave={() => setCursorText('')}
-              className={`flex-shrink-0 px-3.5 py-2 border text-left transition-all rounded ${
+              className={`flex-shrink-0 px-4 py-2 border text-left transition-all rounded-xl snap-center ${
                 isActive
                   ? 'border-white bg-white text-black font-semibold'
                   : 'border-white/10 bg-neutral-950/60 text-neutral-400 hover:border-white/30 hover:text-white'
@@ -95,9 +95,9 @@ export const PipelineSection: React.FC = () => {
       </div>
 
       {/* Stage Detail Card - Centered */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start w-full max-w-5xl mx-auto text-left">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-start w-full max-w-5xl mx-auto text-left">
         {/* Left Column: Stage Info */}
-        <div className="lg:col-span-7 bg-[#0a0a0a]/90 border border-white/20 p-6 sm:p-8 backdrop-blur-md rounded">
+        <div className="lg:col-span-7 bg-[#0a0a0a]/90 border border-white/20 p-5 sm:p-8 backdrop-blur-md rounded-2xl">
           <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
             <div className="font-mono text-xs tracking-[0.25em] text-neutral-400 uppercase">
               PHASE 0{currentStep.step} // {currentStep.simpleTitle.toUpperCase()}
@@ -131,7 +131,7 @@ export const PipelineSection: React.FC = () => {
         </div>
 
         {/* Right Column: Interactive Attention Gate / Balance Simulator */}
-        <div className="lg:col-span-5 bg-[#0a0a0a]/90 border border-white/20 p-6 backdrop-blur-md rounded space-y-4">
+        <div className="lg:col-span-5 bg-[#0a0a0a]/90 border border-white/20 p-5 sm:p-6 backdrop-blur-md rounded-2xl space-y-4">
           <div className="flex items-center justify-between border-b border-white/10 pb-3">
             <div className="flex items-center space-x-2">
               <Sliders className="w-4 h-4 text-white" />
@@ -178,7 +178,7 @@ export const PipelineSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-neutral-950 p-3 border border-neutral-800 rounded text-xs space-y-1">
+            <div className="bg-neutral-950 p-4 border border-neutral-800 rounded-xl text-xs space-y-1">
               <div className="flex items-center space-x-1.5 text-neutral-300 font-mono text-[11px]">
                 <Activity className="w-3 h-3 text-white" />
                 <span>Conflict Sensitivity</span>

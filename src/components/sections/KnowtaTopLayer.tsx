@@ -49,7 +49,7 @@ export const KnowtaTopLayer: React.FC = () => {
       <div className="relative z-10 flex flex-col items-center justify-center my-auto text-center px-4">
         {/* Massive Interactive Title "Know Ta!" */}
         <div
-          className="flex flex-wrap items-center justify-center text-[4rem] sm:text-[7rem] md:text-[10rem] lg:text-[12rem] font-display font-bold tracking-tighter text-white leading-none drop-shadow-2xl gap-x-4 sm:gap-x-8 md:gap-x-12"
+          className="flex flex-wrap sm:whitespace-nowrap items-center justify-center text-[3.25rem] xs:text-[4rem] sm:text-[7rem] md:text-[9rem] lg:text-[11rem] font-display font-bold tracking-tighter text-white leading-none drop-shadow-2xl gap-x-3 sm:gap-x-8 md:gap-x-12"
           aria-label="Know Ta!"
         >
           {words.map((word, wordIdx) => (
@@ -83,11 +83,11 @@ export const KnowtaTopLayer: React.FC = () => {
         </div>
 
         {/* Bespoke Research Sub-Identity */}
-        <div className="mt-6 sm:mt-8 flex flex-col items-center space-y-2">
-          <div className="font-mono text-xs sm:text-[13px] tracking-[0.25em] uppercase text-neutral-300 font-normal">
+        <div className="mt-6 sm:mt-8 flex flex-col items-center space-y-2 w-full max-w-sm sm:max-w-none mx-auto">
+          <div className="font-mono text-[11px] sm:text-[13px] tracking-[0.1em] sm:tracking-[0.25em] uppercase text-neutral-300 font-normal px-2">
             Dual-Branch Deep Learning Audio Classifier
           </div>
-          <div className="text-[10px] sm:text-[11px] font-mono tracking-[0.22em] text-neutral-500 uppercase">
+          <div className="text-[9px] sm:text-[11px] font-mono tracking-wider sm:tracking-[0.22em] text-neutral-500 uppercase px-2 leading-relaxed">
             Separate Stem Forensics · Vocal Pauses vs Synthetic Latents
           </div>
         </div>

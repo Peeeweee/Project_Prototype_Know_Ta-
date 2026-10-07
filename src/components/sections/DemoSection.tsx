@@ -67,7 +67,7 @@ export const DemoSection: React.FC = () => {
         onClick={() => fileInputRef.current?.click()}
         onMouseEnter={() => setCursorText('DROP')}
         onMouseLeave={() => setCursorText('')}
-        className={`w-full max-w-lg mx-auto border-2 border-dashed p-6 text-center transition-all duration-300 cursor-pointer overflow-hidden group bg-neutral-950/80 backdrop-blur-md rounded mb-6 ${
+        className={`w-full max-w-lg mx-auto border-2 border-dashed p-6 text-center transition-all duration-300 cursor-pointer overflow-hidden group bg-neutral-950/80 backdrop-blur-md rounded-2xl mb-6 ${
           isDragging
             ? 'border-white bg-white/10 scale-[1.01]'
             : 'border-white/20 hover:border-white/50 hover:bg-white/[0.03]'
@@ -117,7 +117,7 @@ export const DemoSection: React.FC = () => {
             }}
             onMouseEnter={() => setCursorText('SAMPLE A')}
             onMouseLeave={() => setCursorText('')}
-            className={`p-5 border text-left transition-all relative group bg-[#0a0a0a]/90 backdrop-blur-md rounded ${
+            className={`p-5 border text-left transition-all relative group bg-[#0a0a0a]/90 backdrop-blur-md rounded-2xl ${
               selectedPreset === 'A'
                 ? 'border-white ring-1 ring-white/20'
                 : 'border-white/10 hover:border-white/40'
@@ -152,7 +152,7 @@ export const DemoSection: React.FC = () => {
             }}
             onMouseEnter={() => setCursorText('SAMPLE B')}
             onMouseLeave={() => setCursorText('')}
-            className={`p-5 border text-left transition-all relative group bg-[#0a0a0a]/90 backdrop-blur-md rounded ${
+            className={`p-5 border text-left transition-all relative group bg-[#0a0a0a]/90 backdrop-blur-md rounded-2xl ${
               selectedPreset === 'B'
                 ? 'border-white ring-1 ring-white/20'
                 : 'border-white/10 hover:border-white/40'
@@ -187,7 +187,7 @@ export const DemoSection: React.FC = () => {
             }}
             onMouseEnter={() => setCursorText('TRY THIS')}
             onMouseLeave={() => setCursorText('')}
-            className={`p-5 border text-left transition-all relative group bg-[#0a0a0a]/90 backdrop-blur-md rounded ${
+            className={`p-5 border text-left transition-all relative group bg-[#0a0a0a]/90 backdrop-blur-md rounded-2xl ${
               selectedPreset === 'C'
                 ? 'border-white ring-1 ring-white/20 bg-white/[0.04]'
                 : 'border-white/20 hover:border-white/50'

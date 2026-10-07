@@ -40,7 +40,7 @@ export const ResearchSection: React.FC = () => {
       </div>
 
       {/* Research Navigation Tabs */}
-      <div className="flex justify-center items-center overflow-x-auto pb-3 mb-6 space-x-2 border-b border-white/10 w-full max-w-5xl scrollbar-none">
+      <div className="flex justify-start md:justify-center items-center overflow-x-auto pb-4 mb-6 space-x-3 sm:space-x-2 border-b border-white/10 w-full max-w-5xl scrollbar-none px-4 snap-x snap-mandatory">
         {[
           { id: 'ablation', label: '1. Does Splitting Help?' },
           { id: 'echoes', label: '2. Tests on Other AI Tools' },
@@ -55,7 +55,7 @@ export const ResearchSection: React.FC = () => {
               onClick={() => setActiveTab(tab.id as any)}
               onMouseEnter={() => setCursorText('VIEW')}
               onMouseLeave={() => setCursorText('')}
-              className={`px-3.5 py-1.5 border font-mono text-xs tracking-wider uppercase transition-all whitespace-nowrap rounded ${
+              className={`px-4 py-2 border font-mono text-xs tracking-wider uppercase transition-all whitespace-nowrap rounded-xl snap-center ${
                 isActive
                   ? 'border-white bg-white text-black font-semibold'
                   : 'border-white/10 bg-neutral-950/60 text-neutral-400 hover:border-white/30 hover:text-white'
@@ -69,7 +69,7 @@ export const ResearchSection: React.FC = () => {
 
       {/* TAB 1: ABLATION TABLE */}
       {activeTab === 'ablation' && (
-        <div className="border border-white/20 bg-[#0a0a0a]/90 backdrop-blur-md p-6 sm:p-8 rounded max-w-5xl w-full text-left">
+        <div className="border border-white/20 bg-[#0a0a0a]/90 backdrop-blur-md p-5 sm:p-8 rounded-2xl max-w-5xl w-full text-left">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
             <div>
               <h3 className="text-xl sm:text-2xl font-display font-medium text-white">
@@ -134,7 +134,7 @@ export const ResearchSection: React.FC = () => {
 
       {/* TAB 2: UNSEEN GENERATORS */}
       {activeTab === 'echoes' && (
-        <div className="border border-white/20 bg-[#0a0a0a]/90 backdrop-blur-md p-6 sm:p-8 rounded max-w-5xl w-full text-left">
+        <div className="border border-white/20 bg-[#0a0a0a]/90 backdrop-blur-md p-5 sm:p-8 rounded-2xl max-w-5xl w-full text-left">
           <div className="mb-6">
             <h3 className="text-xl sm:text-2xl font-display font-medium text-white">
               Does it still work on AI tools it never trained on?
@@ -165,7 +165,7 @@ export const ResearchSection: React.FC = () => {
 
       {/* TAB 3: CALIBRATION */}
       {activeTab === 'calibration' && (
-        <div className="border border-white/20 bg-[#0a0a0a]/90 backdrop-blur-md p-6 sm:p-8 rounded max-w-5xl w-full text-left">
+        <div className="border border-white/20 bg-[#0a0a0a]/90 backdrop-blur-md p-5 sm:p-8 rounded-2xl max-w-5xl w-full text-left">
           <div className="mb-6">
             <h3 className="text-xl sm:text-2xl font-display font-medium text-white">
               Can you actually trust the percentage scores?
@@ -205,7 +205,7 @@ export const ResearchSection: React.FC = () => {
 
       {/* TAB 4: DATASETS */}
       {activeTab === 'datasets' && (
-        <div className="border border-white/20 bg-[#0a0a0a]/90 backdrop-blur-md p-6 sm:p-8 rounded max-w-5xl w-full text-left">
+        <div className="border border-white/20 bg-[#0a0a0a]/90 backdrop-blur-md p-5 sm:p-8 rounded-2xl max-w-5xl w-full text-left">
           <div className="mb-6">
             <h3 className="text-xl sm:text-2xl font-display font-medium text-white">
               Music Collections Used in the Research
@@ -230,7 +230,7 @@ export const ResearchSection: React.FC = () => {
 
       {/* TAB 5: DELIMITATIONS */}
       {activeTab === 'limits' && (
-        <div className="border border-white/20 bg-[#0a0a0a]/90 backdrop-blur-md p-6 sm:p-8 rounded max-w-5xl w-full text-left">
+        <div className="border border-white/20 bg-[#0a0a0a]/90 backdrop-blur-md p-5 sm:p-8 rounded-2xl max-w-5xl w-full text-left">
           <div className="mb-6">
             <h3 className="text-xl sm:text-2xl font-display font-medium text-white">
               Honest Research Delimitations
@@ -244,7 +244,7 @@ export const ResearchSection: React.FC = () => {
             {SIMPLE_LIMITS.map((limit, idx) => {
               const isOpen = openLimitIdx === idx;
               return (
-                <div key={limit.title} className="border border-white/10 bg-neutral-950/70 rounded overflow-hidden">
+                <div key={limit.title} className="border border-white/10 bg-neutral-950/70 rounded-2xl overflow-hidden">
                   <button
                     onClick={() => toggleLimit(idx)}
                     className="w-full p-4 flex items-center justify-between text-left hover:bg-white/5 transition-colors"

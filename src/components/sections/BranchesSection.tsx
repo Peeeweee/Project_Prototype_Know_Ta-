@@ -191,7 +191,7 @@ export const BranchesSection: React.FC = () => {
             setHoveredBranch(null);
             setCursorText('');
           }}
-          className={`border p-6 transition-all duration-300 relative bg-[#0a0a0a]/90 backdrop-blur-md rounded ${
+          className={`border p-5 sm:p-6 transition-all duration-300 relative bg-[#0a0a0a]/90 backdrop-blur-md rounded-2xl ${
             hoveredBranch === 'vocal'
               ? 'opacity-40 border-white/5'
               : hoveredBranch === 'audio'
@@ -244,7 +244,7 @@ export const BranchesSection: React.FC = () => {
             setHoveredBranch(null);
             setCursorText('');
           }}
-          className={`border p-6 transition-all duration-300 relative bg-[#0a0a0a]/90 backdrop-blur-md rounded ${
+          className={`border p-5 sm:p-6 transition-all duration-300 relative bg-[#0a0a0a]/90 backdrop-blur-md rounded-2xl ${
             hoveredBranch === 'audio'
               ? 'opacity-40 border-white/5'
               : hoveredBranch === 'vocal'
