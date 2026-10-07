@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { Upload, Play, FastForward, AlertOctagon, Terminal } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const DemoSection: React.FC = () => {
   const {
@@ -217,8 +218,24 @@ export const DemoSection: React.FC = () => {
       </div>
 
       {/* FULLSCREEN CINEMATIC ANALYSIS OVERLAY */}
-      {isAnalyzing && (
-        <div className="fixed inset-0 z-[9990] bg-black/95 backdrop-blur-xl flex flex-col justify-between p-6 sm:p-14 select-none">
+      <AnimatePresence>
+        {isAnalyzing && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[9990] bg-black/95 backdrop-blur-xl flex flex-col justify-between p-6 sm:p-14 select-none overflow-hidden"
+          >
+            {/* Ambient Background Glow matching phase */}
+            <motion.div
+              animate={{
+                opacity: analysisProgress > 80 ? 0.3 : 0.1,
+                scale: [1, 1.2, 1]
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] bg-white rounded-full blur-[120px] pointer-events-none opacity-10"
+            />
           {/* Header */}
           <div className="flex justify-between items-center border-b border-neutral-800 pb-4">
             <div className="flex items-center space-x-3">
@@ -239,73 +256,230 @@ export const DemoSection: React.FC = () => {
 
           {/* Center Visual Sequence */}
           <div className="max-w-3xl w-full mx-auto my-auto py-8 text-center">
-            {/* Waveform Bifurcation Graphic */}
-            <div className="mb-10 flex items-center justify-center space-x-8">
-              <div className="space-y-1">
-                <div className="font-mono text-xs text-neutral-300 uppercase tracking-widest font-semibold">
-                  1. SINGER'S VOICE
-                </div>
-                <div className="h-10 w-32 bg-neutral-900 border border-neutral-800 flex items-center justify-center">
-                  <div className="w-24 h-1 bg-white/50 animate-pulse" />
-                </div>
-              </div>
+            {/* Dynamic Morphing Analysis Visualizer */}
+            <div className="h-40 w-full flex items-center justify-center relative mb-8">
+              <AnimatePresence mode="wait">
+                {analysisProgress < 32 && (
+                  <motion.div
+                    key="phase1"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.4 }}
+                    className="w-48 h-16 border border-white/20 bg-white/5 rounded-2xl flex items-center justify-center relative overflow-hidden"
+                  >
+                    <motion.div
+                      animate={{ x: ['-100%', '200%'] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-1/2"
+                    />
+                    <span className="font-mono text-[10px] tracking-[0.2em] text-white uppercase relative z-10">Ingesting Audio</span>
+                  </motion.div>
+                )}
 
-              <div className="font-mono text-sm text-neutral-400">
-                ⮜ SPLITTING ⮞
-              </div>
+                {analysisProgress >= 32 && analysisProgress < 75 && (
+                  <motion.div
+                    key="phase234"
+                    initial={{ opacity: 0, scale: 0.8, gap: '0px' }}
+                    animate={{ opacity: 1, scale: 1, gap: '32px' }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.5, ease: 'backOut' }}
+                    className="flex items-center"
+                  >
+                    <motion.div
+                      layout
+                      className={`w-28 sm:w-32 h-24 rounded-2xl border flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-500 ${
+                        analysisProgress >= 62 ? 'border-white bg-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)]' : 'border-white/20 bg-black'
+                      }`}
+                    >
+                      <span className="font-mono text-[10px] text-neutral-400 mb-2 uppercase tracking-widest">Vocals</span>
+                      {analysisProgress >= 62 ? (
+                        <div className="flex space-x-1">
+                          {[1, 2, 3, 4].map(i => (
+                            <motion.div
+                              key={i}
+                              animate={{ height: ['4px', '20px', '4px'] }}
+                              transition={{ duration: 0.5, delay: i * 0.1, repeat: Infinity }}
+                              className="w-1 bg-white rounded-full"
+                            />
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="w-12 h-px bg-white/20" />
+                      )}
+                    </motion.div>
 
-              <div className="space-y-1">
-                <div className="font-mono text-xs text-neutral-300 uppercase tracking-widest font-semibold">
-                  2. INSTRUMENTS
-                </div>
-                <div className="h-10 w-32 bg-neutral-900 border border-neutral-800 flex items-center justify-center">
-                  <div className="w-24 h-4 bg-white/30 animate-pulse" />
-                </div>
-              </div>
+                    <motion.div
+                      animate={{ opacity: [0.2, 1, 0.2] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="font-mono text-[10px] text-neutral-600 tracking-[0.2em]"
+                    >
+                      SPLIT
+                    </motion.div>
+
+                    <motion.div
+                      layout
+                      className={`w-28 sm:w-32 h-24 rounded-2xl border flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-500 ${
+                        analysisProgress >= 48 && analysisProgress < 62 ? 'border-white bg-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)]' : 'border-white/20 bg-black'
+                      }`}
+                    >
+                      <span className="font-mono text-[10px] text-neutral-400 mb-2 uppercase tracking-widest">Inst</span>
+                      {analysisProgress >= 48 && analysisProgress < 62 ? (
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                          className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full"
+                        />
+                      ) : (
+                        <div className="w-12 h-px bg-white/20" />
+                      )}
+                    </motion.div>
+                  </motion.div>
+                )}
+
+                {analysisProgress >= 75 && analysisProgress < 88 && (
+                  <motion.div
+                    key="phase5"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.4 }}
+                    className="w-64 h-24 border border-white/30 bg-white/5 rounded-2xl flex flex-col items-center justify-center relative overflow-hidden"
+                  >
+                    <span className="font-mono text-[10px] tracking-[0.2em] text-white uppercase mb-4 relative z-10">Attention Balance</span>
+                    <div className="w-40 h-1 bg-white/10 rounded-full relative z-10">
+                      <motion.div
+                        animate={{ x: ['0%', '150%', '50%'] }}
+                        transition={{ duration: 1.5, ease: 'easeInOut' }}
+                        className="w-1/3 h-full bg-white rounded-full relative shadow-[0_0_10px_rgba(255,255,255,1)]"
+                      />
+                    </div>
+                  </motion.div>
+                )}
+
+                {analysisProgress >= 88 && analysisProgress < 100 && (
+                  <motion.div
+                    key="phase6"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.4 }}
+                    className="grid grid-cols-10 gap-2 p-5 bg-white/5 border border-white/20 rounded-2xl backdrop-blur-md"
+                  >
+                    {Array.from({ length: 20 }).map((_, i) => (
+                      <motion.div
+                        key={i}
+                        animate={{ opacity: [0.1, 1, 0.1] }}
+                        transition={{ duration: Math.random() * 0.5 + 0.3, repeat: Infinity, delay: Math.random() }}
+                        className="w-2.5 h-2.5 bg-white rounded-[2px]"
+                      />
+                    ))}
+                  </motion.div>
+                )}
+
+                {analysisProgress === 100 && (
+                  <motion.div
+                    key="phase7"
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ type: 'spring', damping: 15, stiffness: 200 }}
+                    className="w-20 h-20 bg-white text-black rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.4)]"
+                  >
+                    <motion.svg
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+                      viewBox="0 0 24 24"
+                      className="w-8 h-8"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </motion.svg>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
-            {/* Current Step Title */}
-            <div className="font-mono text-xs text-neutral-300 uppercase tracking-[0.2em] mb-2">
-              {analysisStepText}
+            {/* Current Step Title with smooth text transition */}
+            <div className="h-6 flex items-center justify-center mb-2 overflow-hidden relative z-10">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={analysisStepText}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="font-mono text-[10px] sm:text-xs text-neutral-300 uppercase tracking-[0.2em]"
+                >
+                  {analysisStepText}
+                </motion.div>
+              </AnimatePresence>
             </div>
 
-            <div className="font-display text-5xl sm:text-7xl font-medium tracking-tight text-white mb-6 tabular-nums">
+            <motion.div 
+              key={analysisProgress}
+              initial={{ scale: 0.9, opacity: 0.8 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.4 }}
+              className="font-display text-5xl sm:text-7xl font-medium tracking-tight text-white mb-6 tabular-nums relative z-10 drop-shadow-lg"
+            >
               {analysisProgress}%
-            </div>
+            </motion.div>
 
             {/* High-precision Progress Bar */}
-            <div className="w-full h-1.5 bg-neutral-900 relative overflow-hidden mb-8 border border-neutral-800 rounded">
-              <div
-                className="absolute top-0 left-0 h-full bg-white transition-all duration-300 ease-out"
-                style={{ width: `${analysisProgress}%` }}
+            <div className="w-full h-1.5 bg-neutral-900/50 relative overflow-hidden mb-8 border border-neutral-800 rounded-full z-10">
+              <motion.div
+                className="absolute top-0 left-0 h-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+                initial={{ width: 0 }}
+                animate={{ width: `${analysisProgress}%` }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
               />
             </div>
 
             {/* 20-check indicator */}
-            <div className="inline-flex items-center space-x-3 bg-neutral-900/90 border border-neutral-700 px-4 py-2 rounded-full font-mono text-xs text-neutral-200">
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center space-x-3 bg-neutral-900/90 border border-neutral-700 px-5 py-2.5 rounded-full font-mono text-[10px] sm:text-xs text-neutral-200 relative z-10"
+            >
               <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
               <span>
                 Certainty Verification: Check {Math.min(20, Math.max(1, Math.floor((analysisProgress / 100) * 20)))} of 20
               </span>
-            </div>
+            </motion.div>
           </div>
 
           {/* Bottom Streaming Terminal Logs */}
-          <div className="bg-[#080808] border border-neutral-800 p-4 rounded font-mono text-xs text-neutral-400 max-h-36 overflow-y-auto text-left">
-            <div className="flex items-center space-x-2 text-neutral-400 uppercase tracking-wider mb-2 border-b border-neutral-900 pb-1 font-semibold">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-black/60 border border-neutral-800 p-4 rounded-xl font-mono text-[10px] sm:text-xs text-neutral-400 max-h-36 overflow-y-auto text-left relative z-10 backdrop-blur-md"
+          >
+            <div className="flex items-center space-x-2 text-neutral-400 uppercase tracking-wider mb-2 border-b border-neutral-900 pb-2 font-semibold">
               <Terminal className="w-3.5 h-3.5 text-neutral-300" />
               <span>Live Step-by-Step Progress</span>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1.5 pt-1">
               {analysisLogs.map((log, lIdx) => (
-                <div key={lIdx} className="text-neutral-300">
+                <motion.div 
+                  key={lIdx}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="text-neutral-300"
+                >
                   {log}
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
