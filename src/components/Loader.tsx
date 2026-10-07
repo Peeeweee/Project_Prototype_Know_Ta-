@@ -301,8 +301,8 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     };
   }, []);
 
-  // MINIMALIST AUDIO OSCILLOSCOPE (Precision Vector Drawing)
-  // Replaces chunky boxed cards with a feather-light, elegant hairline signal display
+  // DYNAMIC AUDIO OSCILLOSCOPE (Precision Real-Time Vector Drawing)
+  // Fast, responsive acoustic frequency oscillations (independent of slow background)
   useEffect(() => {
     const canvas = waveformCanvasRef.current;
     if (!canvas) return;
@@ -313,7 +313,8 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     let t = 0;
 
     const renderWave = () => {
-      t += 0.008; // Ultra-slow, serene harmonic oscillation
+      // Natural, active audio frequency rate (responsive soundwave vibration)
+      t += 0.045;
       const width = canvas.width;
       const height = canvas.height;
       const centerY = height / 2;
@@ -330,17 +331,18 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
 
       if (phase === 1) {
         // ACT I: Entangled Single Composite Audio Wave
-        // Clean, flowing single hairline waveform
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
-        ctx.lineWidth = 1.3;
+        // Vibrant, fluid, multi-harmonic acoustic audio stream
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.lineWidth = 1.35;
         ctx.beginPath();
         for (let x = 0; x < width; x += 2) {
           const normX = (x / width) * 10;
           const envelope = Math.sin((x / width) * Math.PI); // Windowed at sides
           const yOffset =
-            (Math.sin(normX * 2.2 + t * 1.4) * 18 +
-              Math.sin(normX * 4.8 - t * 0.9) * 8 +
-              Math.sin(normX * 7.5 + t * 2.1) * 4) *
+            (Math.sin(normX * 1.8 + t * 2.6) * 16 +
+              Math.sin(normX * 3.6 - t * 4.2) * 9 +
+              Math.sin(normX * 7.4 + t * 6.5) * 5 +
+              Math.cos(normX * 11.2 - t * 8.0) * 2.5) *
             envelope;
           const y = centerY + yOffset;
           if (x === 0) ctx.moveTo(x, y);
@@ -348,43 +350,45 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
         }
         ctx.stroke();
 
-        // Very faint harmonic echo
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        // Secondary harmonic echo / acoustic reflection
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
         ctx.lineWidth = 0.8;
         ctx.beginPath();
         for (let x = 0; x < width; x += 3) {
           const normX = (x / width) * 8;
           const envelope = Math.sin((x / width) * Math.PI);
-          const y = centerY + Math.sin(normX * 3.5 - t * 1.1) * 12 * envelope;
+          const y = centerY + (Math.sin(normX * 3.2 - t * 3.2) * 10 + Math.sin(normX * 6.0 + t * 5.0) * 4) * envelope;
           if (x === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
         ctx.stroke();
       } else if (phase === 2) {
         // ACT II: Dual-Branch Separation
-        // Two distinct, ultra-fine parallel streams:
-        // Top Stream: Vocal Trajectory (continuous vibrato wave)
+        // Two distinct, lively parallel streams:
+        // Top Stream: Vocal Trajectory (lively singing vibrato & formant shifts)
         const vocalY = centerY - 22;
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
-        ctx.lineWidth = 1.3;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.95)';
+        ctx.lineWidth = 1.35;
         ctx.beginPath();
         for (let x = 0; x < width; x += 2) {
           const envelope = Math.sin((x / width) * Math.PI);
-          const vibrato = Math.sin(x * 0.05 + t * 2.0) * 8;
-          const drift = Math.cos(x * 0.015 + t * 0.6) * 6;
-          const y = vocalY + (vibrato + drift) * envelope;
+          const vibrato = Math.sin(x * 0.08 + t * 5.5) * 8;
+          const formant = Math.sin(x * 0.02 - t * 2.2) * 6;
+          const micro = Math.cos(x * 0.16 + t * 7.5) * 2.5;
+          const y = vocalY + (vibrato + formant + micro) * envelope;
           if (x === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
         ctx.stroke();
 
-        // Bottom Stream: Instrumental Stems (delicate vertical rhythmic ticks)
+        // Bottom Stream: Instrumental Stems (dynamic rhythmic beat EQ bars)
         const instY = centerY + 22;
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
-        ctx.lineWidth = 1;
-        for (let x = 18; x < width - 18; x += 10) {
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.55)';
+        ctx.lineWidth = 1.1;
+        for (let x = 16; x < width - 16; x += 8) {
           const envelope = Math.sin((x / width) * Math.PI);
-          const barHeight = (Math.abs(Math.sin(x * 0.08 + t * 1.2)) * 14 + 2) * envelope;
+          const beat = Math.sin(t * 4.2 + x * 0.14);
+          const barHeight = (Math.abs(beat * Math.cos(t * 2.8 - x * 0.06)) * 16 + 2.5) * envelope;
           ctx.beginPath();
           ctx.moveTo(x, instY - barHeight);
           ctx.lineTo(x, instY + barHeight);
@@ -392,7 +396,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
         }
 
         // Center separation axis (delicate dashed line)
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
         ctx.setLineDash([2, 5]);
         ctx.beginPath();
         ctx.moveTo(30, centerY);
@@ -401,29 +405,30 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
         ctx.setLineDash([]);
       } else {
         // ACT III & IV: Cross-Attention Fusion
-        // Coherent, resonant standing wave with a single center focus reticle
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
-        ctx.lineWidth = 1.3;
+        // Resonant standing wave with active phase locking & central reticle
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.lineWidth = 1.35;
         ctx.beginPath();
         for (let x = 0; x < width; x += 2) {
           const envelope = Math.sin((x / width) * Math.PI);
-          const resonance = Math.sin((x / width) * Math.PI * 4 + t * 1.6) * 16 * envelope;
+          const resonance = (Math.sin((x / width) * Math.PI * 6 + t * 4.5) * 14 + Math.sin((x / width) * Math.PI * 12 - t * 6.0) * 4) * envelope;
           const y = centerY + resonance;
           if (x === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
         ctx.stroke();
 
-        // Center reticle focus mark
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        // Pulsating reticle focus mark
+        const reticleRad = 4.5 + Math.sin(t * 5.0) * 1.5;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
         ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.arc(width / 2, centerY, 5, 0, Math.PI * 2);
+        ctx.arc(width / 2, centerY, reticleRad, 0, Math.PI * 2);
         ctx.stroke();
 
         ctx.fillStyle = '#ffffff';
         ctx.beginPath();
-        ctx.arc(width / 2, centerY, 1.5, 0, Math.PI * 2);
+        ctx.arc(width / 2, centerY, 1.6, 0, Math.PI * 2);
         ctx.fill();
       }
 
