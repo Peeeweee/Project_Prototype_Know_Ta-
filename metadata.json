@@ -1,0 +1,6 @@
+{
+  "name": "Know-Ta! · Dual-Branch AI Music Detector",
+  "description": "A Dual-Branch Deep Learning Framework for Cross-Platform AI-Generated Music Detection by USeP CIC researchers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
