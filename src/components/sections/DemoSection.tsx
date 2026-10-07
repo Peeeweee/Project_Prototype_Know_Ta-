@@ -258,139 +258,141 @@ export const DemoSection: React.FC = () => {
           <div className="max-w-3xl w-full mx-auto my-auto py-8 text-center">
             {/* Dynamic Morphing Analysis Visualizer */}
             <div className="h-40 w-full flex items-center justify-center relative mb-8">
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="popLayout">
+                {/* Phase 1: Ingestion - Glowing Waveform Pill */}
                 {analysisProgress < 32 && (
                   <motion.div
                     key="phase1"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.4 }}
-                    className="w-48 h-16 border border-white/20 bg-white/5 rounded-2xl flex items-center justify-center relative overflow-hidden"
+                    layoutId="morphing-core"
+                    className="w-48 h-16 border border-white/20 bg-white/5 rounded-full flex items-center justify-center relative overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.1)]"
                   >
                     <motion.div
-                      animate={{ x: ['-100%', '200%'] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-1/2"
+                      animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                      className="w-24 h-1 bg-white rounded-full"
                     />
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-white uppercase relative z-10">Ingesting Audio</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-1/2 animate-[spin_2s_linear_infinite] origin-center opacity-50" />
                   </motion.div>
                 )}
 
+                {/* Phase 2/3/4: Splitting - Dual Orbs */}
                 {analysisProgress >= 32 && analysisProgress < 75 && (
-                  <motion.div
-                    key="phase234"
-                    initial={{ opacity: 0, scale: 0.8, gap: '0px' }}
-                    animate={{ opacity: 1, scale: 1, gap: '32px' }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.5, ease: 'backOut' }}
-                    className="flex items-center"
-                  >
+                  <motion.div key="phase234" className="flex items-center space-x-8 sm:space-x-12 relative">
                     <motion.div
-                      layout
-                      className={`w-28 sm:w-32 h-24 rounded-2xl border flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-500 ${
-                        analysisProgress >= 62 ? 'border-white bg-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)]' : 'border-white/20 bg-black'
+                      layoutId="morphing-core"
+                      className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-500 ${
+                        analysisProgress >= 62 ? 'border-white bg-white/10 shadow-[0_0_40px_rgba(255,255,255,0.3)]' : 'border-white/30 bg-black'
                       }`}
                     >
-                      <span className="font-mono text-[10px] text-neutral-400 mb-2 uppercase tracking-widest">Vocals</span>
+                      <span className="absolute top-2 font-mono text-[9px] text-white/50 uppercase tracking-widest">Vocals</span>
                       {analysisProgress >= 62 ? (
-                        <div className="flex space-x-1">
-                          {[1, 2, 3, 4].map(i => (
+                        <div className="flex space-x-1.5 items-end h-8">
+                          {[1, 2, 3, 4, 5].map(i => (
                             <motion.div
                               key={i}
-                              animate={{ height: ['4px', '20px', '4px'] }}
-                              transition={{ duration: 0.5, delay: i * 0.1, repeat: Infinity }}
+                              animate={{ height: ['4px', '24px', '4px'] }}
+                              transition={{ duration: 0.4, delay: i * 0.1, repeat: Infinity, ease: 'easeInOut' }}
                               className="w-1 bg-white rounded-full"
                             />
                           ))}
                         </div>
                       ) : (
-                        <div className="w-12 h-px bg-white/20" />
+                        <div className="w-10 h-px bg-white/20" />
                       )}
                     </motion.div>
 
+                    {/* Connecting Energy Beam */}
                     <motion.div
-                      animate={{ opacity: [0.2, 1, 0.2] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="font-mono text-[10px] text-neutral-600 tracking-[0.2em]"
+                      initial={{ width: 0, opacity: 0 }}
+                      animate={{ width: 40, opacity: 1 }}
+                      exit={{ width: 0, opacity: 0 }}
+                      className="h-px bg-white/30 relative"
                     >
-                      SPLIT
+                      <motion.div
+                        animate={{ x: ['0%', '100%'] }}
+                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                        className="w-1/2 h-full bg-white shadow-[0_0_10px_white]"
+                      />
                     </motion.div>
 
                     <motion.div
-                      layout
-                      className={`w-28 sm:w-32 h-24 rounded-2xl border flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-500 ${
-                        analysisProgress >= 48 && analysisProgress < 62 ? 'border-white bg-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)]' : 'border-white/20 bg-black'
+                      initial={{ scale: 0.5, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.5, opacity: 0 }}
+                      className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 flex flex-col items-center justify-center relative overflow-hidden transition-colors duration-500 ${
+                        analysisProgress >= 48 && analysisProgress < 62 ? 'border-white bg-white/10 shadow-[0_0_40px_rgba(255,255,255,0.3)]' : 'border-white/30 bg-black'
                       }`}
                     >
-                      <span className="font-mono text-[10px] text-neutral-400 mb-2 uppercase tracking-widest">Inst</span>
+                      <span className="absolute top-2 font-mono text-[9px] text-white/50 uppercase tracking-widest">Inst</span>
                       {analysisProgress >= 48 && analysisProgress < 62 ? (
                         <motion.div
                           animate={{ rotate: 360 }}
                           transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                          className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full"
+                          className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full"
                         />
                       ) : (
-                        <div className="w-12 h-px bg-white/20" />
+                        <div className="w-10 h-px bg-white/20" />
                       )}
                     </motion.div>
                   </motion.div>
                 )}
 
+                {/* Phase 5: Balancing - Scale Track */}
                 {analysisProgress >= 75 && analysisProgress < 88 && (
                   <motion.div
                     key="phase5"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.4 }}
-                    className="w-64 h-24 border border-white/30 bg-white/5 rounded-2xl flex flex-col items-center justify-center relative overflow-hidden"
+                    layoutId="morphing-core"
+                    className="w-64 sm:w-80 h-10 border border-white/30 bg-white/5 rounded-full flex items-center relative overflow-hidden shadow-[0_0_30px_rgba(255,255,255,0.1)]"
                   >
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-white uppercase mb-4 relative z-10">Attention Balance</span>
-                    <div className="w-40 h-1 bg-white/10 rounded-full relative z-10">
-                      <motion.div
-                        animate={{ x: ['0%', '150%', '50%'] }}
-                        transition={{ duration: 1.5, ease: 'easeInOut' }}
-                        className="w-1/3 h-full bg-white rounded-full relative shadow-[0_0_10px_rgba(255,255,255,1)]"
-                      />
-                    </div>
+                    <motion.div
+                      animate={{ left: ['10%', '80%', '40%'] }}
+                      transition={{ duration: 2, ease: 'easeInOut' }}
+                      className="absolute w-12 h-12 bg-white rounded-full shadow-[0_0_30px_rgba(255,255,255,1)] flex items-center justify-center z-10"
+                      style={{ top: '-4px', marginLeft: '-24px' }}
+                    >
+                      <div className="w-4 h-4 border-2 border-black rounded-full" />
+                    </motion.div>
+                    <div className="w-full h-px bg-white/20 absolute top-1/2 -translate-y-1/2" />
                   </motion.div>
                 )}
 
+                {/* Phase 6: Monte Carlo - Particle Swarm */}
                 {analysisProgress >= 88 && analysisProgress < 100 && (
                   <motion.div
                     key="phase6"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.4 }}
-                    className="grid grid-cols-10 gap-2 p-5 bg-white/5 border border-white/20 rounded-2xl backdrop-blur-md"
+                    layoutId="morphing-core"
+                    className="w-48 h-48 rounded-full border border-white/10 bg-black flex flex-wrap items-center justify-center p-6 gap-2 relative shadow-[0_0_50px_rgba(255,255,255,0.15)]"
                   >
                     {Array.from({ length: 20 }).map((_, i) => (
                       <motion.div
                         key={i}
-                        animate={{ opacity: [0.1, 1, 0.1] }}
-                        transition={{ duration: Math.random() * 0.5 + 0.3, repeat: Infinity, delay: Math.random() }}
-                        className="w-2.5 h-2.5 bg-white rounded-[2px]"
+                        initial={{ scale: 0, opacity: 0, x: (Math.random() - 0.5) * 100, y: (Math.random() - 0.5) * 100 }}
+                        animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3], x: 0, y: 0 }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Infinity,
+                          delay: Math.random() * 0.5,
+                          ease: 'circOut'
+                        }}
+                        className="w-3 h-3 bg-white rounded-full shadow-[0_0_15px_rgba(255,255,255,0.8)]"
                       />
                     ))}
                   </motion.div>
                 )}
 
+                {/* Phase 7: Verdict - Checkmark */}
                 {analysisProgress === 100 && (
                   <motion.div
                     key="phase7"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ type: 'spring', damping: 15, stiffness: 200 }}
-                    className="w-20 h-20 bg-white text-black rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.4)]"
+                    layoutId="morphing-core"
+                    className="w-24 h-24 bg-white text-black rounded-full flex items-center justify-center shadow-[0_0_80px_rgba(255,255,255,0.6)]"
                   >
                     <motion.svg
                       initial={{ pathLength: 0 }}
                       animate={{ pathLength: 1 }}
-                      transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+                      transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
                       viewBox="0 0 24 24"
-                      className="w-8 h-8"
+                      className="w-10 h-10"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="3"
@@ -422,9 +424,9 @@ export const DemoSection: React.FC = () => {
 
             <motion.div 
               key={analysisProgress}
-              initial={{ scale: 0.9, opacity: 0.8 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
               className="font-display text-5xl sm:text-7xl font-medium tracking-tight text-white mb-6 tabular-nums relative z-10 drop-shadow-lg"
             >
               {analysisProgress}%
