@@ -49,7 +49,7 @@ export const KnowtaTopLayer: React.FC = () => {
       <div className="relative z-10 flex flex-col items-center justify-center my-auto text-center px-4">
         {/* Massive Interactive Title "Know Ta!" */}
         <div
-          className="flex flex-wrap items-center justify-center text-7xl sm:text-9xl md:text-[11rem] lg:text-[13rem] font-display font-bold tracking-tighter text-white leading-none drop-shadow-2xl gap-x-5 sm:gap-x-10 md:gap-x-14"
+          className="flex flex-wrap items-center justify-center text-[4rem] sm:text-[7rem] md:text-[10rem] lg:text-[12rem] font-display font-bold tracking-tighter text-white leading-none drop-shadow-2xl gap-x-4 sm:gap-x-8 md:gap-x-12"
           aria-label="Know Ta!"
         >
           {words.map((word, wordIdx) => (
